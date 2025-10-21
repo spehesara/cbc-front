@@ -1,0 +1,92 @@
+/* Full-page styling */
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: "Poppins", sans-serif;
+  height: 100%;
+}
+
+/* Center the card on screen */
+.login-page {
+  background: linear-gradient(135deg, #74b9ff, #a29bfe);
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Main single card */
+.login-card {
+  background-color: #fff;
+  padding: 40px 50px;
+  border-radius: 16px;
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+  width: 320px;
+  text-align: center;
+}
+
+/* Title */
+.login-card h1 {
+  margin-bottom: 24px;
+  color: #2d3436;
+  font-size: 26px;
+}
+
+/* Label styling */
+.login-card label {
+  display: block;
+  text-align: left;
+  font-weight: 500;
+  color: #2d3436;
+  margin-bottom: 6px;
+}
+
+/* Input fields */
+.login-card input[type="text"],
+.login-card input[type="password"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #b2bec3;
+  border-radius: 8px;
+  margin-bottom: 18px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.3s;
+}
+
+/* Input focus effect */
+.login-card input[type="text"]:focus,
+.login-card input[type="password"]:focus {
+  border-color: #0984e3;
+  box-shadow: 0 0 4px rgba(9, 132, 227, 0.4);
+}
+
+/* Button styling */
+.login-card button {
+  background-color: #0984e3;
+  color: white;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-size: 15px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 100%;
+}
+
+/* Hover effect */
+.login-card button:hover {
+  background-color: #74b9ff;
+}
+
+/* Responsive */
+@media (max-width: 400px) {
+  .login-card {
+    width: 90%;
+    padding: 30px 20px;
+  }
+
+  .login-card h1 {
+    font-size: 22px;
+  }
+}
