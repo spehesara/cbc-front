@@ -1,19 +1,67 @@
-import './loginPage.css';
+import axios from "axios"
+import { useState } from "react"
+import toast from "react-hot-toast"
 
 export default function LoginPage() {
-  return (
-    <div className="login-page">
-      <div className="login-card">
-        <h1>Login Page</h1>
 
-        <label>Username:</label>
-        <input type="text" name="username" />
 
-        <label>Password:</label>
-        <input type="password" name="password" />
+    const [email, setEmail] = useState("Your email")
+    const [password, setPassword] = useState("")
 
-        <button type="submit">Login</button>
-      </div>
-    </div>
-  );
+    function login() {
+
+        axios.post("http://localhost:5000/api/users/login", {
+
+            email: email,
+            password: password
+        }).then((res) => {
+
+            if (res.data.user == null) {
+                toast.error(res.data.message)
+                return
+            }
+
+            toast.success("Login successful")
+            localStorage.setItem("token", res.data.token)
+            if (res.data.user.type == "admin") {
+                window.location.href = "/admin"
+
+            }else{
+                window.location.href = "/"
+            }
+
+
+        })
+    }
+
+    return (
+
+        <div className="bg-red-600 w-full h-screen flex justify-center items-center">
+
+            <div className="bg-blue-600 w-[450px] h-[450px] flex flex-col justify-center items-center">
+                <img src="/cbc.png" className="rounded-full w-[100px]" />
+
+                <span>Email</span>
+                <input defaultValue={email} onChange={(e) => {
+
+                    setEmail(e.target.value)
+
+                }} />
+                <span>Password</span>
+                <input type="password" defaultValue={password} onChange={(e) => {
+
+                    setPassword(e.target.value)
+                }} />
+                <button className="bg-white mt-3" onClick={login}>Login</button>
+
+
+            </div>
+
+        </div>
+
+
+
+    )
+
+
 }

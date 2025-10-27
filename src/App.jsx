@@ -8,6 +8,9 @@ import { UserData } from './components/UserData'
 import LoginPage from './pages/loginPage'
 import { BrowserRouter, Route, Routes } from 'react-router-dom'
 import HomePage from './pages/homePage'
+import SignInPage from './pages/signinPage'
+import AdminHomePage from './pages/adminHomePage'
+import { Toaster } from 'react-hot-toast'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -15,13 +18,16 @@ function App() {
   return (
     <>
 <BrowserRouter>
+<Toaster/>
 
 <Routes path="/*">
 
 <Route path="/" element={ <HomePage /> } />
 <Route path="/login" element={ <LoginPage /> } />
- 
- <Route path="/*" element={<h1>404 Not Found</h1>} />
+ <Route path="/signup" element={ <UserData /> } />
+
+  <Route path="/admin/*" element={ <AdminHomePage /> } />
+ <Route path="/*" element={<HomePage/>} />
 </Routes>
 
 
