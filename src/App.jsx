@@ -11,6 +11,7 @@ import HomePage from './pages/homePage'
 import SignInPage from './pages/signinPage'
 import AdminHomePage from './pages/adminHomePage'
 import { Toaster } from 'react-hot-toast'
+import FileUploadTest from './pages/test'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -28,6 +29,9 @@ function App() {
 
   <Route path="/admin/*" element={ <AdminHomePage /> } />
  <Route path="/*" element={<HomePage/>} />
+
+<Route path="/testing" element={<FileUploadTest/>}/>
+
 </Routes>
 
 
