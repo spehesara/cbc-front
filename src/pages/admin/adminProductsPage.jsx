@@ -13,7 +13,7 @@ export default function AdminProductsPage() {
   useEffect(() => {
 if(!ProductsLoaded){
 
-   axios.get("http://localhost:5000/api/products").then((res) => {
+   axios.get(import.meta.env.VITE_BACKEND_URL + "/api/products").then((res) => {
       console.log("UseEffect is Running");
       setProducts(res.data);
       setProductsLoaded(true);
@@ -77,7 +77,7 @@ ProductsLoaded?<div className="overflow-x-auto shadow-lg rounded-2xl bg-white">
                           
                           const token = localStorage.getItem("token");
 
-                          axios.delete(`http://localhost:5000/api/products/${product.productId}`, {
+                          axios.delete(import.meta.env.VITE_BACKEND_URL+`/api/products/${product.productId}`, {
                             headers: { Authorization: `Bearer ${token}` },
                           })
                           .then((res) => {
