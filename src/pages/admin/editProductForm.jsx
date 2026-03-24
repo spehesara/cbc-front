@@ -10,33 +10,34 @@ export default function EditProductForm() {
   const navigate = useNavigate()
   const location = useLocation();
 
-  const product = location.state.product;
-  
-  const altNames = product.altNames.join(",")
+  const product = location.state?.product;
 
-  if(product==null){
-navigate("/admin/products");
-
+ if (!product) {
+    navigate("/admin/products");
+    return null;
   }
 
   // adminproduct page eken ewana product details tika json ekakin gannawa edit product page ekata eeka print karana console ekee//
   console.log(location);
-
-  const [productId, setProductId] = useState(product.productId);
-  const [productName, setProductName] = useState(product.productName);
-  const [alternativeNames, setAlternativeNames] = useState(altNames);
+  
+  const [productId, setProductId] = useState(product.productId || '');
+  const [productName, setProductName] = useState(product.productName || '');
+  const [alternativeNames, setAlternativeNames] = useState(product.altName?.join(',') || '');
   const [imageFiles, setImageFiles] = useState([]);
-  const [price, setPrice] = useState(product.price);
-  const [lastPrice, setLastPrice] = useState(product.lastPrice);
-  const [stock, setStock] = useState(product.stock);
-  const [description, setDescription] = useState(product.description);
+  const [price, setPrice] = useState(product.price || '');
+  const [lastPrice, setLastPrice] = useState(product.lastPrice || '');
+  const [stock, setStock] = useState(product.stock || '');
+  const [description, setDescription] = useState(product.description || '');
 
 
   // ✅ handleSubmit should NOT return JSX
   async function handleSubmit() {
     const altNames = alternativeNames.split(",");
 
+    let imgUrls = product.images
     const promisesArray = []
+
+    if(imageFiles.length > 0){
    
     for(let i=0; i<imageFiles.length; i++){
     
@@ -44,10 +45,10 @@ navigate("/admin/products");
 
     }
 
-  const imgUrls = await Promise.all(promisesArray)
+   imgUrls = await Promise.all(promisesArray)
+  }
 
-
-    const product = {
+    const productData = {
       productId: productId,
       productName: productName,
       altNames: altNames,
@@ -63,16 +64,16 @@ navigate("/admin/products");
 
 
     try {
-      await axios.post(
-        import.meta.env.VITE_BACKEND_URL + "/api/products",
-        product,
+      await axios.put(
+        import.meta.env.VITE_BACKEND_URL + "/api/products"+product.productId,
+        productData,
         token ? { headers: { Authorization: `Bearer ${token}` } } : {}
       );
 
       navigate("/admin/products");
-      toast.success("Product added successfully!");
+      toast.success("Product Updated successfully!");
     } catch (err) {
-      toast.error("Failed to add product. Please try again.");
+      toast.error("Failed to update product. Please try again.");
     }
   }
 
@@ -91,7 +92,6 @@ navigate("/admin/products");
             <div className="flex flex-col">
               <label className="text-gray-700 font-medium mb-1">Product ID</label>
               <input
-              disabled
                 type="text"
                 value={productId}
                 onChange={(e) => setProductId(e.target.value)}
@@ -187,7 +187,7 @@ navigate("/admin/products");
             onClick={handleSubmit}
             className="w-1/2 bg-blue-600 text-white font-medium py-2 rounded-lg hover:bg-green-700 transition duration-200 shadow-md"
           >
-            Add Product
+            Update Product
           </button>
         </div>
       </div>

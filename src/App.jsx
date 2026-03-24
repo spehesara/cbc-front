@@ -29,12 +29,12 @@ function App() {
 <Route path="/login" element={ <LoginPage /> } />
 
 
-  <Route path="/admin/*" element={ <AdminHomePage /> } />
+  
  
- <Route path="/products/addProduct" element={<AddProductForm/>} />
- <Route path="/admin/products/editProduct" element={<EditProductForm/>} />
+ 
 <Route path="/testing" element={<FileUploadTest/>}/>
 
+<Route path="/admin/*" element={ <AdminHomePage /> } />
 <Route path="/*" element={<HomePage/>} />
 
 </Routes>

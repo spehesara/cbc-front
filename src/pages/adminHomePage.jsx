@@ -3,6 +3,7 @@ import { GoGraph, GoPackage, GoCreditCard, GoPeople } from "react-icons/go";
 import { MdSpaceDashboard } from "react-icons/md";
 import AdminProductsPage from "./admin/adminProductsPage";
 import AddProductForm from "./admin/addProductForm";
+import EditProductForm from "./admin/editProductForm";
 
 export default function AdminHomePage() {
   return (
@@ -64,6 +65,8 @@ export default function AdminHomePage() {
           />
           <Route path="/products" element={<AdminProductsPage />} />
           <Route path="/products/addProduct" element={<AddProductForm />} />
+          <Route path="/products/editProduct" element={<EditProductForm />} />
+          
           <Route
             path="/orders"
             element={<h1 className="text-2xl font-bold">🧾 Orders Management</h1>}
