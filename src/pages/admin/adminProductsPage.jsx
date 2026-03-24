@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import toast from "react-hot-toast";
 import { FaPlus, FaTrash } from "react-icons/fa";
 import { FaPencil } from "react-icons/fa6";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export default function AdminProductsPage() {
   const [products, setProducts] = useState([]);
@@ -22,6 +22,9 @@ if(!ProductsLoaded){
 }
     
   }, [ProductsLoaded]);
+
+
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gray-100 py-10 px-6">
@@ -98,6 +101,10 @@ ProductsLoaded?<div className="overflow-x-auto shadow-lg rounded-2xl bg-white">
                   <button
                     className="text-blue-500 hover:text-blue-700 transition"
                     title="Edit Product"
+                    onClick={()=>{
+navigate("/admin/products/editProduct", {state:{product:product}});
+
+                    }}
                   >
                     <FaPencil size={18} />
                   </button>
