@@ -51,7 +51,7 @@ export default function EditProductForm() {
     const productData = {
       productId: productId,
       productName: productName,
-      altNames: altNames,
+      altName: altNames,
       images: imgUrls,
       price: price,
       lastPrice: lastPrice,
@@ -65,7 +65,7 @@ export default function EditProductForm() {
 
     try {
       await axios.put(
-        import.meta.env.VITE_BACKEND_URL + "/api/products"+product.productId,
+        import.meta.env.VITE_BACKEND_URL + "/api/products/"+product.productId,
         productData,
         token ? { headers: { Authorization: `Bearer ${token}` } } : {}
       );
